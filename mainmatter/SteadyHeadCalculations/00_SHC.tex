@@ -1,0 +1,21 @@
+\chapter{Steady Head Calculations}
+\label{chap:SHC}
+This chapter describes the calculations used to keep the tip of the transducer in the same location in several dimensions. That is, while the transducer might change its orientation (i.e., yaw, pitch and roll) and its $x$-coordinate, the $y$-coordinate can be kept constant. These calculations make use of homogeneous transformations, which allow for both translations and rotations between frames using matrix multiplications. For a world frame $\mathcal{N}$ and body frame $\mathcal{B}$, one can express a vector $^\mathcal{B}\mathbf{x}$ in the world frame with:
+\begin{align}
+    \underbrace{\left[\begin{array}{r} ^\mathcal{N}\mathbf{x}  \\ 1 \end{array}\right]}_{^\mathcal{N}\mathbf{x}_e}  &= \underbrace{\left[ \begin{array}{cc} ^\mathcal{N}R_\mathcal{B} &  ^\mathcal{N}\mathbf{r}_{B} \\ \mathbf{0}^{1x3} & 1 \end{array}  \right]}_{^\mathcal{N}T_\mathcal{B}} \; \underbrace{\left[\begin{array}{r} ^\mathcal{B}\mathbf{x}  \\ 1 \end{array}\right]}_{^\mathcal{B}\mathbf{x}_e} \label{eq: homTrans}\\
+    &= \left[ \begin{array}{c}
+         ^\mathcal{N}R_\mathcal{B}\; ^\mathcal{B}\mathbf{x} +\,  ^\mathcal{N}\mathbf{r}_{B} \\
+         1
+    \end{array} \right] \nonumber
+\end{align}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/SteadyHeadCalculations/SHC_transf.png}
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
+
+% Include the rest. Note: cannot use include due nested includes.
+% \input{mainmatter/MotorSpeedCalculations/01_TimeEstimation}
+% \input{mainmatter/MotorSpeedCalculations/02_ScalingFactor}

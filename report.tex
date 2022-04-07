@@ -1,0 +1,56 @@
+\documentclass{layout/corbotics-report}
+
+%% Setting up the bibliography
+\usepackage[backend=biber,style=apa,sorting=nty]{biblatex}
+\addbibresource{report.bib}
+
+% Default titles
+\def\Topic{Robot Firmware}
+\def\Subtitle{Documentation of Main Components}
+\def\Employee{Fabian Ballast}
+
+%% Additional commands
+\renewcommand{\deg}{\si{\degree}\xspace}
+
+%%%%% Begin of document %%%%%
+
+\begin{document}
+
+%% Roman numerals
+\frontmatter
+
+%% Defining the main parameters (can be adapted for Dutch report)
+\author{ \Employee{}, \Company{} } 
+\subject{\Product{} \Version{} \Topic{}}
+
+\coverimage{figures/FrontPage/firmware_front_page.png} % Aspect ratio of 2:3 (portrait) recommended
+\definecolor{title}{HTML}{4884d6} % Color for the title
+
+\makecover
+
+%% Place % below to remove table of contents.
+\tableofcontents
+\include{frontmatter/preface}
+
+%% Arabic numerals
+\mainmatter
+
+\include{mainmatter/MotorSpeedCalculations/00_MSC} % Includes the rest
+\include{mainmatter/SteadyHeadCalculations/00_SHC}
+
+%% Prevent urls running into margins in bibliography
+\setcounter{biburlnumpenalty}{7000}
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{7000}
+
+%% Bibliography is numeric style
+\setlength\bibitemsep{1.5\itemsep}
+\printbibliography
+\addcontentsline{toc}{chapter}{\bibname}
+
+%% Using letters for chapters
+\appendix
+%\input{appendix/}
+
+
+\end{document}

@@ -1,0 +1,32 @@
+\section{Scaling Factor}
+\label{sec:scalingFactor}
+This section describes the calculations for the scaling factor based on a time requirement. The time requirement is calculated from a time estimation, described in \cref{sec:timeEst}. In order to synchronize different motors, the following procedure is followed:
+
+\begin{itemize}
+    \item Calculate the duration of the movement of each motor to its target position.
+    \item For all motors that arrive before the slowest motor, decrease their $v_{max}$ such that they arrive at the same time as the slowest motor.
+\end{itemize}
+
+\noindent The ratio by which $v_{max}$ is reduced is denoted with $\alpha$. In \cref{sec:timeEst}, essentially two types of trajectories are discussed: bang-coast-bang trajectories ($v_{max}$ was reached) and bang-bang trajectories ($v_{max}$ was not reached). A bang-coast-bang trajectory with a lower $v_{max}$ always results in another bang-coast-bang trajectory, whereas a bang-bang trajectory now also must result in a bang-coast-bang trajectory (otherwise nothing was altered). Thus, all new trajectories follow the trajectory and calculations from \cref{sub: MSC_speedreached} (except for the slowest motor, which may follow a bang-bang trajectory). 
+
+\bigskip
+\noindent All motors reach their (scaled) $v_{max}$ and the goal is to reach the target at $t_{req}$, where it must be that $t_{req} > t_{fastest}$\footnote{Note that the slowest motor is excluded from these calculations, as this motor might follow a trajectory. Its scaling factor is already known to be zero.} with $t_{fastest}$ being the fastest trajectory as derived in \cref{eq: tFastBCB}. Then, if $v_{max}$ is scaled with a factor $\alpha$, the time to the target is found as:
+\begin{align*}
+    t_{req} = t_{0target} &= \frac{\alpha \, v_{max} - v_0 - v_{target}}{a_{max}}+ \frac{s_{target}}{\alpha \, v_{max}} + \frac{v_0^2 + v_{target}^2}{2\, \alpha \, v_{max} \, a_{max}} \\
+    \alpha \, t_{req} &= \frac{\alpha^2 \, v_{max}}{a_{max}} - \alpha \frac{v_0 + v_{target}}{a_{max}}+ \frac{s_{target}}{v_{max}} + \frac{v_0^2 + v_{target}^2}{2\, v_{max} \, a_{max}} \\
+    0 &= \underbrace{\frac{v_{max}}{a_{max}}}_{a} \alpha^2 + \underbrace{\left(-\frac{v_0 + v_{target}}{a_{max}} - t_{req}\right)}_{b}\alpha + \underbrace{\frac{s_{target}}{v_{max}} + \frac{v_0^2 + v_{target}^2}{2\, v_{max} \, a_{max}}}_{c}
+\end{align*}
+\noindent This quadratic equation can easily be solved, yielding two solutions:
+\begin{align*}
+    \alpha &= \frac{-b \pm \sqrt{b^2 - 4 \,a\,c}}{2\,a} \\
+    &= \frac{\frac{v_0 + v_{target}}{a_{max}} + t_{req} \pm \sqrt{\left(\frac{v_0 + v_{target}}{a_{max}} + t_{req}\right)^2 - 4 \left(\frac{s_{target}}{a_{max}} + \frac{v_0^2 + v_{target}^2}{2\,a_{max}^2}\right)}}{2 \frac{v_{max}}{a_{max}}} \\
+    &= \frac{v_0 + v_{target}  + t_{req} \, a_{max} \pm \sqrt{\left({v_0 + v_{target}} + t_{req} \, a_{max} \right)^2 - 2 \left(2 \, s_{target} \, a_{max} + v_0^2 + v_{target}^2\right)}}{2 \, v_{max}} 
+\end{align*}
+
+\noindent For a given $t_{req}$, an increasing $s_{target}$ should result in an increasing $\alpha$. As the square root gets smaller, this must mean the only correct solution is where we subtract the square root\footnote{Note that the extra solution was added through the square in the beginning of this section.}. Thus, the correct equation for $\alpha$ is shown in \cref{eq: scalingFactor}.
+\begin{equation}
+    \alpha = \frac{v_0 + v_{target}  + t_{req} \, a_{max} - \sqrt{\left({v_0 + v_{target}} + t_{req} \, a_{max} \right)^2 - 2 \left(2 \, s_{target} \, a_{max} + v_0^2 + v_{target}^2\right)}}{2 \, v_{max}} \label{eq: scalingFactor}
+\end{equation}
+
+
+

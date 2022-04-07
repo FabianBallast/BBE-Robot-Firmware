@@ -1,0 +1,14 @@
+\chapter{Motor Speed Calculations}
+\label{chap:MSC}
+This chapter describes the calculations used to synchronize the motors in the \Product{}. It assumes second order bang-coast-bang trajectories, which has up to three stages:
+\begin{enumerate}
+    \item In the first stage, the motor accelerates with maximum acceleration from its initial velocity $v_0$ to its cruising velocity $v_{cruise}$. This is the first bang.
+    \item In the second stage, the motor maintains a constant velocity ($v_{cruise}$). This is the coast.
+    \item In the third and final stage, the motor decelerates to its target velocity $v_{target}$. This is the second bang.
+\end{enumerate}
+
+\noindent The goal is to make $v_{cruise}$ as high as possible (as long as its lower than the maximum velocity $v_{max}$), to reach the target as quickly as possible. Note that, by changing $v_0$, $v_{target}$ or the total distance we need to travel, the total trajectory can be any combination of these three stages, as long as they remain in this order (e.g., not bang-bang-coast, but bang-bang or bang-coast are possible with certain parameters).
+
+% Include the rest. Note: cannot use include due nested includes.
+\input{mainmatter/MotorSpeedCalculations/01_TimeEstimation}
+\input{mainmatter/MotorSpeedCalculations/02_ScalingFactor}
