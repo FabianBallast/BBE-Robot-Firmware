@@ -139,12 +139,12 @@
     \RequirePackage{fontspec} % Custom fonts
 
     %% Adding the various fonts
-    \setmainfont{Arial}
-    \setmathsf{Arial}
-    \setmathtt{Arial}
+    % \setmainfont{Arial}
+    % \setmathsf{Arial}
+    % \setmathtt{Arial}
 
     \newfontfamily\corboticstitlefamily[Path=layout/corbotics/]{Corbotics-UltraLight.ttf}
-    \newfontfamily\quotefont{Georgia}
+    % \newfontfamily\quotefont{Georgia}
 
     %% Defining commands to be used in layout
     \def\largetitlestyle{\corboticstitlefamily}
