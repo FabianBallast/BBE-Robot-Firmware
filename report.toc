@@ -1,8 +1,0 @@
-\contentsline {chapter}{Preface}{iii}{chapter*.2}%
-\contentsline {chapter}{\numberline {1}Motor Speed Calculations}{1}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Time Estimation}{2}{section.1.1}%
-\contentsline {subsection}{\numberline {1.1.1}Situation 1: Maximum Speed Reached}{3}{subsection.1.1.1}%
-\contentsline {subsection}{\numberline {1.1.2}Situation 2: Maximum Speed Not Reached}{4}{subsection.1.1.2}%
-\contentsline {section}{\numberline {1.2}Scaling Factor}{5}{section.1.2}%
-\contentsline {chapter}{\numberline {2}Steady Head Calculations}{6}{chapter.2}%
-\contentsfinish 
